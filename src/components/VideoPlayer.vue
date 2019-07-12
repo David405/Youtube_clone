@@ -6,11 +6,11 @@
 <h3>{{this.activeVideo.title}}</h3>
 <div class="row">
     <p>{{this.activeVideo.views}} views</p> 
-    <p>{{this.activeVideo.likes}} <button>Like</button></p>
+    <p>{{this.activeVideo.likes}} <button @click="addLike">Like</button></p>
 </div>
 
     <div class="video-list">
-    <div :key="video.id" v-for="video in videos" class="thumbnail">
+    <div @click="chooseVideo(video)" :key="video.id" v-for="video in videos" class="thumbnail">
         <div class="thumbnail-img">
           <img :src="video.thumbnail" />
         </div>
@@ -85,7 +85,18 @@ export default {
         videos,
         activeVideo: videos[0]
     }
-  }
+  },
+  methods:{
+  chooseVideo(video){
+      //SET VIDEO AS ACTIVE VIDEO
+      this.activeVideo = video;
+      //INCREASE THE VIDEOS VIEWS BY 1
+      video.views += 1;
+  },
+  addLike(){
+  this.activeVideo.likes += 1;
+}
+}
 }
 </script>
 
